@@ -44,6 +44,11 @@ public class HelloWebServiceImpl implements HelloWebService {
         return new Date();
     }
 
+    @Override
+    public String getByeString(String name) {
+        return "Bye, " + name + ":)";
+    }
+
 }
 
 

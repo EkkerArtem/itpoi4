@@ -22,4 +22,7 @@ public interface HelloWebService {
 
     @WebMethod
     public Date getCurrentTime();
+
+    @WebMethod
+    public String getByeString(String name);
 }
