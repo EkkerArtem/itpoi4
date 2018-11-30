@@ -62,7 +62,7 @@ public class HelloWebServiceImplPortBindingStub extends org.apache.axis.client.S
         _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("getHarbohydrates");
+        oper.setName("getCarbohydrates");
         oper.addParameter(new javax.xml.namespace.QName("", "arg0"), new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, org.apache.axis.description.ParameterDesc.IN, false, false);
         oper.addParameter(new javax.xml.namespace.QName("", "arg1"), new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, org.apache.axis.description.ParameterDesc.IN, false, false);
         oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
@@ -299,7 +299,7 @@ public class HelloWebServiceImplPortBindingStub extends org.apache.axis.client.S
         _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
         _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://server/", "getHarbohydrates"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://server/", "getCarbohydrates"));
 
         setRequestHeaders(_call);
         setAttachments(_call);

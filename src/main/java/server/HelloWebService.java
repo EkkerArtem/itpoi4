@@ -4,6 +4,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import java.util.Date;
+import java.util.HashMap;
 
 @WebService
 
@@ -19,16 +20,22 @@ public interface HelloWebService {
     @WebMethod
     public String getByeString(String name);
 
+    @WebMethod
     public String getCalories(String meal, int count);
 
+    @WebMethod
     public String getFats(String meal, int count);
 
+    @WebMethod
     public String getProteins(String meal, int count);
 
-    public String getHarbohydrates(String meal, int count);
+    @WebMethod
+    public String getCarbohydrates(String meal, int count);
 
+    @WebMethod
+    public HashMap getInfo();
 
-
-
+    @WebMethod
+    public void addFood(String name, double calories, double fat, double proteins, double carbohydrates);
 
 }

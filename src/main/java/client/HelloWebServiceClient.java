@@ -1,54 +1,103 @@
 package client;
 
-// нужно, чтобы получить wsdl описание и через него
-// дотянуться до самого веб-сервиса
-import java.io.FileNotFoundException;
-import java.net.URL;
-// такой эксепшн возникнет при работе с объектом URL
-import java.net.MalformedURLException;
 
-// классы, чтобы пропарсить xml-ку c wsdl описанием
-// и дотянуться до тега service в нем
+import server.HelloWebService;
+
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.ws.Service;
-
-// интерфейс нашего веб-сервиса (нам больше и нужно)
-import server.HelloWebService;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
 
 public class HelloWebServiceClient {
     public static void main(String[] args) throws MalformedURLException, FileNotFoundException, XMLStreamException {
-        // создаем ссылку на wsdl описание
+
         URL url = new URL("http://localhost:1986/wss/hello?wsdl");
 
-        // Параметры следующего конструктора смотрим в самом первом теге WSDL описания - definitions
-        // 1-ый аргумент смотрим в атрибуте targetNamespace
-        // 2-ой аргумент смотрим в атрибуте name
         QName qname = new QName("http://impl.server/", "HelloWebServiceImplService");
 
-
-        // Теперь мы можем дотянуться до тега service в wsdl описании,
         Service service = Service.create(url, qname);
 
-        // а далее и до вложенного в него тега port, чтобы
-        // получить ссылку на удаленный от нас объект веб-сервиса
         HelloWebService hello = service.getPort(HelloWebService.class);
+        Scanner scanner = new Scanner(System.in);
 
-        // Ура! Теперь можно вызывать удаленный метод
         System.out.println(hello.getHelloString("Artem Ekker and Alex Konovalov"));
         System.out.print("Current time and date : -----> ");
         System.out.print(hello.getCurrentTime());
         System.out.println(" <-----");
         System.out.println(" ");
-        System.out.println(hello.getCalories("мясо",150));
-        System.out.println(hello.getProteins("мясо",150));
-        System.out.println(hello.getFats("мясо",150));
-        System.out.println(hello.getHarbohydrates("мясо",150));
-        System.out.println(hello.getCalories("Рыба",250));
-        System.out.println(hello.getProteins("Рыба",250));
-        System.out.println(hello.getFats("Рыба",250));
-        System.out.println(hello.getHarbohydrates("Рыба",250));
+
+        System.out.println("Хотите выбрать еду (1) или добавить еду (2)");
+        int temp = scanner.nextInt();
+        if (temp == 1) {
+            showFood(hello);
+        } else if (temp == 2) {
+            addFood(hello);
+        }
+
         System.out.println(" ");
         System.out.println(hello.getByeString("Artem Ekker and Alex Konovalov"));
     }
+
+    public static void showFood(HelloWebService hello) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Желаете получить информацию о калориях?" + "\n" + "Да/Нет");
+        String yesno = scanner.next().toLowerCase();
+
+        while (yesno.equals("да")) {
+            System.out.println("Что вы съели?");
+            String meal = scanner.next();
+            System.out.println("Сколько вы съели в граммах?");
+            Integer count = scanner.nextInt();
+            System.out.println(hello.getCalories(meal.toLowerCase(), count));
+            System.out.println(hello.getProteins(meal.toLowerCase(), count));
+            System.out.println(hello.getFats(meal.toLowerCase(), count));
+            System.out.println(hello.getCarbohydrates(meal.toLowerCase(), count));
+            System.out.println("Желаете продолжить работу?" + "\n" + "Да/Нет");
+            yesno = scanner.next().toLowerCase();
+            if (yesno.toLowerCase().equals("нет")) System.exit(0);
+
+            System.out.println("Хотите выбрать еду (1) или добавить еду (2)");
+            int temp = scanner.nextInt();
+            if (temp == 1) {
+                showFood(hello);
+            } else if (temp == 2) {
+                addFood(hello);
+            } else break;
+        }
+    }
+
+    public static void addFood(HelloWebService hello) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Желаете добавить еду?" + "\n" + "Да/Нет");
+        String addFoodyesno = scanner.next().toLowerCase();
+
+        while (addFoodyesno.equals("да")) {
+            System.out.println("dobavit' jra4ky");
+            String addedMeal = scanner.next();
+            System.out.println("dobavit' kaloriynost");
+            double cal = scanner.nextDouble();
+            System.out.println("dobavit' yglevodi");
+            double carb = scanner.nextDouble();
+            System.out.println("dobavit' belo4eGG");
+            double bel = scanner.nextDouble();
+            System.out.println("dobavit' jirnost");
+            double fat = scanner.nextDouble();
+            hello.addFood(addedMeal, cal, fat, bel, carb);
+            System.out.println("Желаете продолжить работу?" + "\n" + "Да/Нет");
+            addFoodyesno= scanner.next().toLowerCase();
+            if (addFoodyesno.toLowerCase().equals("нет")) System.exit(0);
+
+            System.out.println("Хотите выбрать еду (1) или добавить еду (2)");
+            int temp = scanner.nextInt();
+            if (temp == 1) {
+                showFood(hello);
+            } else if (temp == 2) {
+                addFood(hello);
+            } else break;
+        }
+    }
+
 }
