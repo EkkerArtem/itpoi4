@@ -56,8 +56,8 @@ public class HelloWebServiceClient {
             System.out.println(hello.getFats(meal.toLowerCase(), count));
             System.out.println(hello.getCarbohydrates(meal.toLowerCase(), count));
             System.out.println("Желаете продолжить работу?" + "\n" + "Да/Нет");
-            yesno = scanner.next().toLowerCase();
-            if (yesno.toLowerCase().equals("нет")) System.exit(0);
+            String yesno2 = scanner.next().toLowerCase();
+            if (yesno2.toLowerCase().equals("нет")) System.exit(0);
 
             System.out.println("Хотите выбрать еду (1) или добавить еду (2)");
             int temp = scanner.nextInt();
@@ -75,20 +75,20 @@ public class HelloWebServiceClient {
         String addFoodyesno = scanner.next().toLowerCase();
 
         while (addFoodyesno.equals("да")) {
-            System.out.println("dobavit' jra4ky");
-            String addedMeal = scanner.next();
-            System.out.println("dobavit' kaloriynost");
+            System.out.println("Введита название еды");
+            String addedMeal = scanner.next().toLowerCase();
+            System.out.println("Введите колличество калорий на 1 грамм еды");
             double cal = scanner.nextDouble();
-            System.out.println("dobavit' yglevodi");
+            System.out.println("Введите колличество углеводов на 1 грамм еды");
             double carb = scanner.nextDouble();
-            System.out.println("dobavit' belo4eGG");
-            double bel = scanner.nextDouble();
-            System.out.println("dobavit' jirnost");
+            System.out.println("Введите колличество белка на 1 грамм еды");
+            double prot = scanner.nextDouble();
+            System.out.println("Введите колличество жиров на 1 грамм еды");
             double fat = scanner.nextDouble();
-            hello.addFood(addedMeal, cal, fat, bel, carb);
+            hello.addFood(addedMeal, cal, fat, prot, carb);
             System.out.println("Желаете продолжить работу?" + "\n" + "Да/Нет");
-            addFoodyesno= scanner.next().toLowerCase();
-            if (addFoodyesno.toLowerCase().equals("нет")) System.exit(0);
+            String addFoodyesno2 = scanner.next().toLowerCase();
+            if (addFoodyesno2.toLowerCase().equals("нет")) System.exit(0);
 
             System.out.println("Хотите выбрать еду (1) или добавить еду (2)");
             int temp = scanner.nextInt();
