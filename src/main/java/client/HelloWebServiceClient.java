@@ -9,10 +9,11 @@ import javax.xml.ws.Service;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class HelloWebServiceClient {
-    public static void main(String[] args) throws MalformedURLException, FileNotFoundException, XMLStreamException {
+    public static void main(String[] args) throws MalformedURLException, FileNotFoundException, XMLStreamException, SQLException {
 
         URL url = new URL("http://localhost:1986/wss/hello?wsdl");
 
@@ -41,7 +42,7 @@ public class HelloWebServiceClient {
         System.out.println(hello.getByeString("Artem Ekker and Alex Konovalov"));
     }
 
-    public static void showFood(HelloWebService hello) {
+    public static void showFood(HelloWebService hello) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Желаете получить информацию о калориях?" + "\n" + "Да/Нет");
         String yesno = scanner.next().toLowerCase();
@@ -69,7 +70,7 @@ public class HelloWebServiceClient {
         }
     }
 
-    public static void addFood(HelloWebService hello) {
+    public static void addFood(HelloWebService hello) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Желаете добавить еду?" + "\n" + "Да/Нет");
         String addFoodyesno = scanner.next().toLowerCase();
