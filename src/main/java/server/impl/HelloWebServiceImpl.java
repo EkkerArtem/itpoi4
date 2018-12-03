@@ -18,30 +18,6 @@ public class HelloWebServiceImpl implements HelloWebService {
     Statement statement = null;
 
 
-    private HashMap<String, Double> caloriesMap = new HashMap<>();
-    private HashMap<String, Double> proteinMap = new HashMap<>();
-    private HashMap<String, Double> fatMap = new HashMap<>();
-    private HashMap<String, Double> carbohydratesMap = new HashMap<>();
-
-    {
-        caloriesMap.put("мясо",1.43);
-        caloriesMap.put("рыба",2.06);
-        caloriesMap.put("курица",2.14);
-
-        proteinMap.put("мясо",.26);
-        proteinMap.put("рыба",.22);
-        proteinMap.put("курица",.24);
-
-        fatMap.put("мясо",.16);
-        fatMap.put("рыба",.21);
-        fatMap.put("курица",0.13);
-
-        carbohydratesMap.put("мясо",.0);
-        carbohydratesMap.put("рыба",.0);
-        carbohydratesMap.put("курица",.0);
-    }
-
-
     private Connection getDBConnection() {
 
         try {
@@ -157,11 +133,6 @@ public class HelloWebServiceImpl implements HelloWebService {
             }
             dbConnection.close();
             return rezString;
-    }
-
-    @Override
-    public HashMap getInfo() {
-        return caloriesMap;
     }
 
     @Override

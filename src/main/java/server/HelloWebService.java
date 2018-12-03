@@ -34,9 +34,6 @@ public interface HelloWebService {
     public String getCarbohydrates(String meal, int count) throws SQLException;
 
     @WebMethod
-    public HashMap getInfo();
-
-    @WebMethod
     public void addFood(String name, double calories, double fat, double proteins, double carbohydrates) throws SQLException;
 
 }
